@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const { red } = require("chalk");
+const { program } = require("commander");
+const genProgram = require("../lib/index");
+// 处理命令行参数
+genProgram(program);
+program.parseAsync(process.argv).catch(error => {
+  console.error(red(error.stack));
+  process.exit(1);
+})
