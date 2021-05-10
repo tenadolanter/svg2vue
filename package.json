@@ -1,6 +1,6 @@
 {
   "name": "@tenado/svg2vue",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A command line tool，tranform svg to vue components",
   "keywords": [
     "svg",

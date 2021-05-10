@@ -5,11 +5,9 @@ const genConfig = (fileList, outFile)=>{
   const len = fileList.length;
   let components = "";
   for(let i = 0; i < len; i++){
-    const item = fileList[i];
-    const isSvgReg = /\.svg$/;
-    if(isSvgReg.test(item)){
-      const fileName = item.split('.svg')[0];
-      components += `"${fileName}": ()=>import("./svg-icons/${fileName}.vue"),\n`
+    const { name, ext } = path.parse(fileList[i]);
+    if(ext === ".svg"){
+      components += `"${name}": ()=>import("./svg-icons/${name}.vue"),\n`
     }
   }
   const content = `export default {\n ${components} } `
@@ -82,29 +80,32 @@ const genComponent = (fileName, content, outFile) => {
 
 
 module.exports = function genSvg(entryFolder, outFolder){
-  fs.readdir(entryFolder, function(err, files){
+  fs.readdir(entryFolder, async function(err, files){
     if(err) console.warn("fail to read file...");
     else {
+      // is folder is not exist, create
       if(!fs.existsSync(outFolder)){
         fs.mkdirSync(outFolder);
       }
-      genConfig(files, outFolder);
-      genEntry(outFolder);
-      const fileList:string[] = [];
+      await genConfig(files, outFolder);
+      await genEntry(outFolder);
       for(let i = 0; i< files.length; i++){
-        fileList.push(files[i]);
         const fileUrl = path.join(entryFolder, files[i]);
-        const stats = fs.statSync(fileUrl);
+        const stats = await fs.statSync(fileUrl);
         const isFile = stats.isFile();
-        const isSvgReg = /\.svg$/;
-        if(isFile && isSvgReg.test(files[i])){
-          let content = fs.readFileSync(fileUrl, 'utf-8');
-          const file = files[i].split(".svg")[0];
-          const fileName = `${file}.vue`;
+        if(isFile){
+          const { name, ext } = path.parse(files[i]);
+          if(ext !== ".svg") continue;
+          let content = await fs.readFileSync(fileUrl, 'utf-8');
+          const fileName = `${name}.vue`;
           const svgReg = /<svg.*?>([\s\S]*?)<\/svg>/;
+          const defReg = /<defs>([\s\S]*?)<\/defs>/;
           let _content;
           try{
-            _content = content.match(svgReg)[0];
+            // remove '\n' if contains
+            _content = content.replace(/\n/g, '').match(svgReg)[0];
+            // remove def content
+            _content = _content.replace(defReg, "");
           }catch(err){}
           genComponent(fileName, _content, outFolder);
         }
