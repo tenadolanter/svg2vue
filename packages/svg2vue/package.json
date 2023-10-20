@@ -7,7 +7,7 @@
     "bin"
   ],
   "scripts": {
-    "init": "node ../../../../bin/svg2vue init"
+    "init": "node ../../bin/svg2vue init"
   },
   "author": "",
   "license": "ISC"
