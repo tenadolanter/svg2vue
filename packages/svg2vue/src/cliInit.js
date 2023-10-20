@@ -4,8 +4,8 @@ const prettier = require("prettier");
 const chalk = require("chalk");
 const defaultConfig = require("./config.js");
 module.exports = async () => {
-  const configName = "svg2vue.config.js";
-  const defaultPath = `./${configName}`;
+  const configFile = "svg2vue.config.js";
+  const defaultPath = `./${configFile}`;
   let isConfigExist = true;
   try {
     fs.accessSync(defaultPath)
@@ -16,7 +16,7 @@ module.exports = async () => {
     const ans = await inquirer.prompt([{
       name: 'overwrite',
       type: 'confirm',
-      message: `配置文件${configName}已存在，是否覆盖？`,
+      message: `配置文件${configFile}已存在，是否覆盖？`,
     }])
     if (!ans.overwrite) process.exit(0);
   }

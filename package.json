@@ -1,7 +1,8 @@
 {
   "name": "tenado-icons",
   "scripts": {
-    "svg2vue-init": "pnpm --filter=@tenado/svg2vue run init"
+    "svg2vue-init": "pnpm --filter=@tenado/svg2vue run init",
+    "svg2vue-sync": "pnpm --filter=@tenado/svg2vue run sync"
   },
   "repository": {
     "type": "git",
