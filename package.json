@@ -1,9 +1,4 @@
 {
-  "name": "svg2vue",
-  "version": "1.0.0",
-  "description": "A command line tool，tranform svg to vue components",
-  "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +11,10 @@
   "bugs": {
     "url": "https://github.com/tenadolanter/svg2vue/issues"
   },
-  "homepage": "https://github.com/tenadolanter/svg2vue#readme"
+  "homepage": "https://github.com/tenadolanter/svg2vue#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "7",
+    "inquirer": "6"
+  }
 }

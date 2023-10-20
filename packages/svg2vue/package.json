@@ -1,0 +1,14 @@
+{
+  "name": "@tenado/svg2vue",
+  "version": "1.0.0",
+  "description": "根据svg生成vue组件，按需引入svg，方便做tree shaking",
+  "file": [
+    "src",
+    "bin"
+  ],
+  "scripts": {
+    "init": "node ../../../../bin/svg2vue init"
+  },
+  "author": "",
+  "license": "ISC"
+}
