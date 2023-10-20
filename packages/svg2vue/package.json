@@ -3,9 +3,11 @@
   "version": "1.0.3",
   "description": "根据svg生成vue组件，按需引入svg，方便做tree shaking",
   "file": [
-    "src",
-    "bin"
+    "src"
   ],
+  "bin": {
+    "svg2vue": "../../bin/svg2vue"
+  },
   "scripts": {
     "init": "node ../../bin/svg2vue init",
     "sync": "node ../../bin/svg2vue sync"
