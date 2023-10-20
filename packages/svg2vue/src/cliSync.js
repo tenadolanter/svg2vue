@@ -94,7 +94,7 @@ module.exports = async () => {
   };
 
   const createIconComponent = (fileName, content, outputPath) => {
-    let content = `
+    let str = `
     <template>\n${content}\n</template>
     <script>
       export default {
@@ -102,17 +102,17 @@ module.exports = async () => {
       }
     </script>
     `;
-    content = prettier.format(content, {
+    str = prettier.format(str, {
       parser: "vue",
       singleQuote: true,
       semi: false,
     });
-    const componentFile = path.join(outFile, `/${iconFolderName}/`);
-    const outPath = path.join(outFile, `/${iconFolderName}/`, fileName);
+    const componentFile = path.join(outputPath, `/${iconFolderName}/`);
+    const outPath = path.join(outputPath, `/${iconFolderName}/`, fileName);
     if (!fs.existsSync(componentFile)) {
       fs.mkdirSync(componentFile);
     }
-    fs.writeFile(outPath, content, (error) => {
+    fs.writeFile(outPath, str, (error) => {
       if (error) {
         console.log(chalk.red(`创建文件 ${outPath} 失败\n`));
         process.exit(1);
@@ -120,7 +120,7 @@ module.exports = async () => {
     });
   };
 
-  const createIconByFiles = async (files, inputPath) => {
+  const createIconByFiles = async (files, inputPath, outputPath) => {
     for(let i = 0; i< files.length; i++){
       const fileUrl = path.join(inputPath, files[i]);
       const stats = await fs.statSync(fileUrl);
@@ -139,7 +139,7 @@ module.exports = async () => {
           // remove def content
           _content = _content.replace(defReg, "");
         }catch(err){}
-        createIconComponent(fileName, _content, outFolder);
+        createIconComponent(fileName, _content, outputPath);
       }
     }
   };
@@ -158,6 +158,6 @@ module.exports = async () => {
     // 生成icon组件列表
     createConfigFile(files, outputPath);
     // 根据循环得到的file，生成icon组件
-    createIconByFiles(files, inputPath);
+    createIconByFiles(files, inputPath, outputPath);
   });
 };
