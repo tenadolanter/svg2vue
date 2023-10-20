@@ -1,5 +1,7 @@
 const fs = require("fs");
+const chalk = require("chalk");
 const cwd = process.cwd();
+const path = require("path");
 module.exports = async () => {
   const configFile = "svg2vue.config.js";
   const configPath = path.join(cwd, configFile);
@@ -17,5 +19,17 @@ module.exports = async () => {
       }
     })
   }
-  
+  const inputPath = path.join(cwd ,options.inputPath);
+  const outputPath = path.join(cwd ,options.outputPath);
+
+  fs.readdir(inputPath, async (err, files) => {
+    if(err) {
+      console.log(chalk.red(`读取文件夹 ${inputPath} 失败\n`));
+      process.exit(0);
+    }
+    // 如果输入文件不存在，则创建
+    if(!fs.existsSync(outputPath)){
+      fs.mkdirSync(outputPath);
+    }
+  })
 }

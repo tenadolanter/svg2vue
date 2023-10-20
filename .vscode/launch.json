@@ -9,6 +9,12 @@
       "name": "Run svg2vue init",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "command": "npm run svg2vue-sync",
+      "name": "Run svg2vue sync",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ]
 }
