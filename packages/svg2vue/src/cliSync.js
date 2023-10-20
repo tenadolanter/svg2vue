@@ -27,7 +27,7 @@ module.exports = async () => {
       console.log(chalk.red(`读取文件夹 ${inputPath} 失败\n`));
       process.exit(0);
     }
-    // 如果输入文件不存在，则创建
+    // 如果输出文件不存在，则创建
     if(!fs.existsSync(outputPath)){
       fs.mkdirSync(outputPath);
     }
