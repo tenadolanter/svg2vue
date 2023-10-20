@@ -1,37 +1,18 @@
 {
-  "name": "@tenado/svg2vue",
-  "version": "1.0.3",
+  "name": "svg2vue",
+  "version": "1.0.0",
   "description": "A command line tool，tranform svg to vue components",
-  "keywords": [
-    "svg",
-    "vue",
-    "ie",
-    "optimize"
-  ],
-  "files": [
-    "bin",
-    "lib"
-  ],
-  "bin": {
-    "svg2vue": "bin/svg2vue"
-  },
+  "main": "index.js",
+  "devDependencies": {},
   "scripts": {
-    "build": "rm -rf lib && tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "chalk": "^4.1.1",
-    "commander": "^7.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "^15.0.2",
-    "typescript": "^4.2.4"
-  },
-  "author": "tenado",
-  "license": "Apache License 2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tenadolanter/svg2vue.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/tenadolanter/svg2vue/issues"
   },
