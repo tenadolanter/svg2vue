@@ -16,3 +16,13 @@ export default {
   inheritAttrs: false,
 }
 </script>
+<style scoped>
+svg {
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+  color: inherit;
+  fill: currentColor;
+  user-select: none;
+}
+</style>

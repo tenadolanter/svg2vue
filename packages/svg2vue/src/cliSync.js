@@ -23,6 +23,8 @@ module.exports = async () => {
   }
   const inputPath = path.join(cwd, options.inputPath);
   const outputPath = path.join(cwd, options.outputPath);
+  const iconPrefix = options.prefix || "Ticon";
+  const iconSeparator = options.separator || "-";
   const createEnterFile = (outputPath) => {
     let content = `<template>
       <component
@@ -31,7 +33,7 @@ module.exports = async () => {
       ></component>
     </template>
     <script>
-    import icons from "./config.js"
+    import icons from "./index.js"
     export default {
       props: {
         name: {
@@ -58,13 +60,20 @@ module.exports = async () => {
       }
     });
   };
+  const toCamelCase = (str) => {
+    return str.replace(/-([a-z])/g, function (match, group1) {
+      return group1.toUpperCase();
+    });
+  }
   const createConfigFile = (files, outputPath) => {
     const len = files.length;
     let components = "";
     for (let i = 0; i < len; i++) {
       const { name, ext } = path.parse(files[i]);
+      let copName = `${iconPrefix}${iconSeparator}${name}`;
+      copName = toCamelCase(copName)
       if (ext === ".svg") {
-        components += `"${name}": ()=>import("./${iconFolderName}/${name}.vue"),\n`;
+        components += `"${copName}": ()=>import("./${iconFolderName}/${name}.vue"),\n`;
       }
     }
     let content = `export default {\n ${components} } `;
@@ -73,7 +82,7 @@ module.exports = async () => {
       singleQuote: true,
       trailingComma: "es5",
     });
-    const outPath = path.join(outputPath, "config.js");
+    const outPath = path.join(outputPath, "index.js");
     fs.writeFile(outPath, content, (error) => {
       if (error) {
         console.log(chalk.red(`创建文件 ${outPath} 失败\n`));

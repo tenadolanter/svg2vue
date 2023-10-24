@@ -5,7 +5,7 @@
   ></component>
 </template>
 <script>
-import icons from './config.js'
+import icons from './index.js'
 export default {
   props: {
     name: {
