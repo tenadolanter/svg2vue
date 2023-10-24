@@ -26,7 +26,6 @@ module.exports = async () => {
   const createEnterFile = (outputPath) => {
     let content = `<template>
       <component
-        class="form-icon"
         v-if="$options.components[name]"
         :is="$options.components[name]"
       ></component>
@@ -45,16 +44,6 @@ module.exports = async () => {
       }
     }
     </script>
-    <style scoped>
-    .form-icon {
-      height: 1em;
-      width: 1em;
-      vertical-align: middle;
-      color: inherit;
-      fill: currentColor;
-      user-select: none;
-    }
-    </style>
     `;
     const outPath = path.join(outputPath, "index.vue");
     content = prettier.format(content, {
@@ -101,6 +90,16 @@ module.exports = async () => {
         inheritAttrs: false,
       }
     </script>
+    <style scoped>
+    svg {
+      height: 1em;
+      width: 1em;
+      vertical-align: middle;
+      color: inherit;
+      fill: currentColor;
+      user-select: none;
+    }
+    </style>
     `;
     str = prettier.format(str, {
       parser: "vue",
